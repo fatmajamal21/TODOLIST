@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('homes', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->enum('day', ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'])->default('الإثنين');
             $table->time('start_time')->nullable(); // وقت البداية
             $table->time('end_time')->nullable();
+            $table->enum('status', ['غير منجز', 'منجز'])->default('غير منجز'); // حالة الإنجاز
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('homes');
+        Schema::dropIfExists('tasks');
     }
 };
